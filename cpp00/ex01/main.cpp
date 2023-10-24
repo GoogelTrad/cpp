@@ -16,5 +16,20 @@
 int main()
 {
 	PhoneBook Book;
-	std::cout << "coucou" << std::endl;
+	std::string tmp;
+	
+	while (1)
+	{
+		tmp = "";
+		std::cout << "PhoneBook : ";
+		std::cin >> tmp;
+
+		if (tmp.compare("ADD") == 0)
+			Book.add();
+		else if (tmp.compare("SEARCH") == 0)
+			Book.search();
+		else if (tmp.compare("EXIT") == 0)
+			break ;
+		std::cout << "\n\n";
+	}
 }

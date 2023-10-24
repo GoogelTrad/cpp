@@ -12,6 +12,19 @@
 
 #include "Contact.hpp"
 
+Contact::Contact()
+{
+	first_name = "";
+	last_name = "";
+	nickname = "";
+	phone_nb = "";
+	secret = "";
+}
+
+Contact::~Contact()
+{
+}
+
 std::string Contact::getFname()
 {
 	return first_name;

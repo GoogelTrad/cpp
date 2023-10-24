@@ -38,17 +38,5 @@ public:
 	~Contact();
 };
 
-Contact::Contact()
-{
-	first_name = "";
-	last_name = "";
-	nickname = "";
-	phone_nb = "";
-	secret = "";
-}
-
-Contact::~Contact()
-{
-}
 
 #endif

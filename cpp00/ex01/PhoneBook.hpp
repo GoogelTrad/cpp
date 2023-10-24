@@ -24,15 +24,10 @@ public:
 	void add();
 	void search();
 	void exit();
+	void affiche(Contact *ct);
+	void limit(std::string str);
+	Contact getInfo(int index);
 	~PhoneBook();
 };
-
-PhoneBook::PhoneBook()
-{
-}
-
-PhoneBook::~PhoneBook()
-{
-}
 
 #endif
