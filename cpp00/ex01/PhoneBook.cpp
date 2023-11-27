@@ -45,10 +45,13 @@ void PhoneBook::add()
 	std::cin >> temp;
 	ct.setSecret(temp);
 
-	int i = 0;
-	while (!rep[i].getFname().empty())
-		i++;
-	rep[i] = ct;
+	if (rep->getIndex() >= 8)
+	{
+		int tmp = -rep->getIndex();
+		rep->setIndex(tmp);
+	}
+	rep[rep->getIndex()] = ct;
+	rep->setIndex(1);
 }
 
 Contact PhoneBook::getInfo(int index)
@@ -65,92 +68,40 @@ Contact PhoneBook::getInfo(int index)
 	return ct;
 }
 
-void PhoneBook::limit(std::string str)
-{
-	int size;
-	int space;
-	int div;
-
-	size = str.size();
-	space = size / 2;
-	if (size > 9)
-	{
-		for (int j = 0; j < 9; j++)
-			std::cout << str[j];
-		std::cout << ".";
-	}
-	else
-	{
-		if (space % 2 == 0)
-			div = space / 2;
-		else
-			div = space / 2 + 1;
-		for (int k = 0; k < div / 2; k++)
-			std::cout << " ";
-		std::cout << str;
-		for (int k = 0; k < space / 2; k++)
-			std::cout << " ";
-	}
-}
-
 void PhoneBook::affiche(Contact *ct)
 {
 	int i = 0;
 	int j;
 
-	std::cout << "|   index   |    name   | lastaname | nickname |" << std::endl;
+	std::cout << "     index|      name|  lastname|  nickname|" << std::endl;
 	for (int i = 0; i < 8; i++)
-	{
-		if (!ct[i].getFname().empty())
-		{
-			std::cout << "| ";
-			PhoneBook::limit(ct[i].getFname());
-			std::cout << " | ";
-			PhoneBook::limit(ct[i].getLname());
-			std::cout << " | ";
-			PhoneBook::limit(ct[i].getNickname());
-			std::cout << " | ";
-			PhoneBook::limit(ct[i].getPhone());
-			std::cout << " | ";
-			PhoneBook::limit(ct[i].getSecret());
-			std::cout << " |";
-		}
-		else
-		{
-			std::cout << "| ";
-			for (int j = 0; j < 4; j++)
-			{
-				PhoneBook::limit("       ");
-				if (j != 3)
-					std::cout << " |";
-				else
-					std::cout << " | ";
-			}
-		}
-		std::cout << std::endl;
-	}
+		std::cout << std::setw(10) << std::setfill(' ') << i << "|" << ct[i].affInfo() << std::endl;
 }
 
 void PhoneBook::search()
 {
 	Contact ct;
-	int index;
+	std::string string;
+	int index = 10;
 
 	PhoneBook::affiche(PhoneBook::rep);
 
 	std::cout << "\n";
 	std::cout << "Index : ";
-	std::cin >> index;
-	if (index < 0 || index > 8)
+	std::cin >> string;
+	index = atoi(string.c_str());
+	if ((index >= 0 || index < 8) && string.size() == 1 && isdigit(string[0]))
 	{
-		std::cout << "index out of range\n";
-		return ;
-	}
-	ct = PhoneBook::getInfo(index);
+		ct = PhoneBook::getInfo(index);
 
-	std::cout << "First name : " << ct.getFname() << std::endl;
-	std::cout << "Last name : " << ct.getLname() << std::endl;
-	std::cout << "Nickname: " << ct.getNickname() << std::endl;
-	std::cout << "Phone number : " << ct.getPhone() << std::endl;
-	std::cout << "Darkest secret : " << ct.getSecret() << std::endl;
+		std::cout << "First name : " << ct.getFname() << std::endl;
+		std::cout << "Last name : " << ct.getLname() << std::endl;
+		std::cout << "Nickname: " << ct.getNickname() << std::endl;
+		std::cout << "Phone number : " << ct.getPhone() << std::endl;
+		std::cout << "Darkest secret : " << ct.getSecret() << std::endl;
+	}
+	else
+	{
+		std::cout << "Wrong index\n";
+	}
 }

@@ -1,33 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   PhoneBook.hpp                                      :+:      :+:    :+:   */
+/*   randomChump.cpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/23 23:41:38 by cmichez           #+#    #+#             */
-/*   Updated: 2023/10/23 23:41:38 by cmichez          ###   ########.fr       */
+/*   Created: 2023/11/27 16:24:43 by cmichez           #+#    #+#             */
+/*   Updated: 2023/11/27 16:24:43 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PHONEBOOK_H
-# define PHONEBOOK_H
+#include "Zombie.hpp"
 
-#include "Contact.hpp"
-
-
-class PhoneBook
+void randomChump(std::string name)
 {
-private:
-	Contact rep[8];
-public:
-	PhoneBook();
-	void add();
-	void search();
-	void exit();
-	void affiche(Contact *ct);
-	Contact getInfo(int index);
-	~PhoneBook();
-};
+	Zombie Coucou;
 
-#endif
+	Coucou.setName(name);
+	Coucou.annonce();
+}

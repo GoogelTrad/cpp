@@ -19,6 +19,7 @@ Contact::Contact()
 	nickname = "";
 	phone_nb = "";
 	secret = "";
+	indexNow = 0;
 }
 
 Contact::~Contact()
@@ -50,6 +51,16 @@ std::string Contact::getSecret()
 	return secret;
 }
 
+int Contact::getIndex()
+{
+	return indexNow;
+}
+
+void Contact::setIndex(int incr)
+{
+	this->indexNow += incr;
+}
+
 void Contact::setFname(std::string first_name)
 {
 	this->first_name = first_name;
@@ -73,4 +84,39 @@ void Contact::setPhone(std::string phone_nb)
 void Contact::setSecret(std::string secret)
 {
 	this->secret = secret;
+}
+
+std::string Contact::cutStr(std::string str)
+{
+	std::string tmp;
+
+	if (str.size() == 10)
+		return tmp;
+	else if (str.size() < 9)
+	{
+		for (int i = 0; i < 10 - str.size(); i++)
+			tmp.push_back(' ');
+		tmp += str;
+	}
+	else
+	{
+		for (int i = 0; i < 9; i++)
+			tmp.push_back(str.at(i));
+		tmp.push_back('.');
+	}
+	return tmp;
+}
+
+std::string Contact::affInfo(void)
+{
+	std::string tmp;
+
+	tmp += this->cutStr(this->getFname());
+	tmp.push_back('|');
+	tmp += this->cutStr(this->getLname());
+	tmp.push_back('|');
+	tmp += this->cutStr(this->getNickname());
+	tmp.push_back('|');
+
+	return tmp;
 }
