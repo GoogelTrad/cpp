@@ -1,30 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Zombie.hpp                                         :+:      :+:    :+:   */
+/*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/27 16:07:19 by cmichez           #+#    #+#             */
-/*   Updated: 2023/11/27 16:07:19 by cmichez          ###   ########.fr       */
+/*   Created: 2023/11/27 16:43:48 by cmichez           #+#    #+#             */
+/*   Updated: 2023/11/27 16:43:48 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
-#include <iomanip>
 
-
-class Zombie
+int main(void)
 {
-	private:
-		std::string name;
-	public:
-		Zombie(/* args */);
-		void setName(std::string name);
-		std::string getName(void);
-		void annonce(void);
-		~Zombie();
-		
-};
+	std::string str = "HI THIS IS BRAIN";
+	std::string *ptr = &str;
+	std::string &ref = str;
 
-Zombie *zombieHorde(int n, std::string name);
+	std::cout << &str << std::endl;
+	std::cout << "stringPTR " << ptr << std::endl;
+	std::cout << "stringREF " << &ref << std::endl;
+
+	std::cout << str << std::endl;
+	std::cout << "stringPTR " << *ptr << std::endl;
+	std::cout << "stringREF " << ref << std::endl;	
+}

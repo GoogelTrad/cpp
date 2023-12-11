@@ -58,8 +58,7 @@ void Harl::complain(std::string level)
 
 	for (int i = 0; i < 4; i++)
 	{
-		void (Harl::*aff)(void) = ptr[i];
 		if (level == complainLevel[i])
-			(this->*aff)();
+			(this->*ptr[i])();
 	}
 }

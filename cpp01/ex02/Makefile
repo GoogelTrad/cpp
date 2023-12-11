@@ -1,11 +1,9 @@
-NAME = Horde
+NAME = Brain
 CFLAGS = -Wall -Wextra -Werror -std=c++98
 CC = c++
 RM = rm -f
 
-SRCS =	main.cpp \
-		Zombie.cpp \
-		zombieHorde.cpp
+SRCS =	main.cpp 
 
 OBJC = ${SRCS:.cpp=.o}
 
