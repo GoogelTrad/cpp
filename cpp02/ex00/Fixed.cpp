@@ -6,7 +6,7 @@
 /*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 23:42:35 by cmichez           #+#    #+#             */
-/*   Updated: 2023/12/01 00:05:59 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/12/11 19:06:35 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 Fixed::Fixed()
 {
 	std::cout << "Default constructor called\n";
-	entier = 0;
+	this->setRawBits(0);
 }
 
 Fixed::~Fixed()

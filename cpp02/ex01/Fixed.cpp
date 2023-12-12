@@ -6,7 +6,7 @@
 /*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 23:42:35 by cmichez           #+#    #+#             */
-/*   Updated: 2023/12/01 00:05:59 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/12/11 19:22:21 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,19 @@
 Fixed::Fixed()
 {
 	std::cout << "Default constructor called\n";
-	entier = 0;
+	this->setRawBits(0);
+}
+
+Fixed::Fixed(const int convert)
+{
+	std::cout << "Int constructor called\n";
+	this->entier = convert << this->bits;
+}
+
+Fixed::Fixed(const float val)
+{
+	std::cout << "Float constructor called\n";
+	this->entier = roundf(val * (1 << this->bits));
 }
 
 Fixed::~Fixed()
@@ -37,11 +49,26 @@ void Fixed::operator=(const Fixed &copie)
 
 int Fixed::getRawBits(void) const
 {
-	std::cout << "getRawBits member function called\n";
 	return this->entier;
 }
 
 void Fixed::setRawBits(int const raw)
 {
 	this->entier = raw;
+}
+
+float Fixed::toFloat(void) const
+{
+	return (float) this->entier / (1 << this->bits);
+}
+
+int Fixed::toInt(void) const
+{
+	return (int) this->entier >> this->bits;
+}
+
+std::ostream &operator<<(std::ostream &stream, const Fixed &val)
+{
+	stream << val.toFloat();
+	return stream;
 }

@@ -6,7 +6,7 @@
 /*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 23:42:22 by cmichez           #+#    #+#             */
-/*   Updated: 2023/12/11 19:19:18 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/12/12 15:18:03 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,35 @@ public:
 	Fixed();
 	Fixed(const int convert);
 	Fixed(const float val);
-	void operator=(const Fixed &copie);
 	Fixed(const Fixed &copie);
+	
+	void operator=(const Fixed &copie);
+	bool operator>(const Fixed &copie) const;
+	bool operator<(const Fixed &copie) const;
+	bool operator>=(const Fixed &copie) const;
+	bool operator<=(const Fixed &copie) const;
+	bool operator==(const Fixed &copie) const;
+	bool operator!=(const Fixed &copie) const;
+
+	Fixed operator+(const Fixed &copie);
+	Fixed operator-(const Fixed &copie);
+	Fixed operator*(const Fixed &copie);
+	Fixed operator/(const Fixed &copie);
+	Fixed &operator++(void);
+	Fixed operator++(int);
+	Fixed &operator--(void);
+	Fixed operator--(int);
+	
+	const static Fixed &min(const Fixed &first, const Fixed &second);
+	const static Fixed &max(const Fixed &first, const Fixed &second);
+	const static Fixed &min(Fixed &first, Fixed &second);
+	const static Fixed &max(Fixed &first, Fixed &second);
+
 	int getRawBits(void) const;
 	void setRawBits(int const raw);
 	float toFloat(void) const;
 	int toInt(void) const;
+	
 	~Fixed();
 };
 
