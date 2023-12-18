@@ -6,7 +6,7 @@
 /*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 14:47:29 by cmichez           #+#    #+#             */
-/*   Updated: 2023/12/18 18:01:14 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/12/18 18:09:19 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 ClapTrap::ClapTrap()
 {
-	std::cout << "Default constructor called !\n";
+	std::cout << "Default ClapTrap constructor called !\n";
 	name = "Tartenpion";
 	hp = 10;
 	mana = 10;
@@ -23,7 +23,7 @@ ClapTrap::ClapTrap()
 
 ClapTrap::ClapTrap(std::string target)
 {
-	std::cout << "Named constructor called !\n";
+	std::cout << "Named ClapTrap constructor called !\n";
 	name = target;
 	hp = 10;
 	mana = 10;
