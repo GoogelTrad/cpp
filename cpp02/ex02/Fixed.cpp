@@ -6,7 +6,7 @@
 /*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 23:42:35 by cmichez           #+#    #+#             */
-/*   Updated: 2023/12/12 15:26:42 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/12/12 15:50:18 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ int Fixed::toInt(void) const
 std::ostream &operator<<(std::ostream &stream, const Fixed &val)
 {
 	stream << val.toFloat();
+	
 	return stream;
 }
 
@@ -130,7 +131,7 @@ Fixed &Fixed::operator++(void)
 Fixed Fixed::operator++(int)
 {
 	Fixed fixed(*this);
-	++(*this);
+	++(this->entier);
 
 	return fixed;
 }
@@ -144,7 +145,7 @@ Fixed &Fixed::operator--(void)
 Fixed Fixed::operator--(int)
 {
 	Fixed fixed(*this);
-	++(*this);
+	--(this->entier);
 
 	return fixed;	
 }
