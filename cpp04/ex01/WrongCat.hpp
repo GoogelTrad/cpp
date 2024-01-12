@@ -19,7 +19,9 @@ private:
 	/* data */
 public:
 	WrongCat();
+	WrongCat(const WrongCat &copy);
 	virtual ~WrongCat();
 
+	WrongCat &operator=(const WrongCat &copy);
 	void makeSound(void) const;
 };

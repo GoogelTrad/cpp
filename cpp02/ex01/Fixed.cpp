@@ -6,7 +6,7 @@
 /*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 23:42:35 by cmichez           #+#    #+#             */
-/*   Updated: 2023/12/11 19:22:21 by cmichez          ###   ########.fr       */
+/*   Updated: 2024/01/02 20:53:01 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,36 +14,36 @@
 
 Fixed::Fixed()
 {
-	std::cout << "Default constructor called\n";
+	std::cout << "Default constructor called" << std::endl;
 	this->setRawBits(0);
 }
 
 Fixed::Fixed(const int convert)
 {
-	std::cout << "Int constructor called\n";
+	std::cout << "Int constructor called" << std::endl;;
 	this->entier = convert << this->bits;
 }
 
 Fixed::Fixed(const float val)
 {
-	std::cout << "Float constructor called\n";
+	std::cout << "Float constructor called" << std::endl;;
 	this->entier = roundf(val * (1 << this->bits));
 }
 
 Fixed::~Fixed()
 {
-	std::cout << "Destructor called\n";
+	std::cout << "Destructor called" << std::endl;;
 }
 
 Fixed::Fixed(const Fixed &copie)
 {
-	std::cout << "Copie constructor called\n";
-	entier = copie.entier;
+	std::cout << "Copie constructor called" << std::endl;;
+	entier = copie.getRawBits();
 }
 
 void Fixed::operator=(const Fixed &copie)
 {
-	std::cout << "Copy assigment operator called\n";
+	std::cout << "Copy assigment operator called" << std::endl;;
 	this->setRawBits(copie.getRawBits());
 }
 

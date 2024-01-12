@@ -30,6 +30,8 @@ int main()
 			Book.search();
 		else if (tmp.compare("EXIT") == 0)
 			break ;
-		std::cout << "\n\n";
+		else
+			tmp = "";
+		std::cout << std::endl << std::endl;
 	}
 }

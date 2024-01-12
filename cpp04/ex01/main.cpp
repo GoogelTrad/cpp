@@ -18,32 +18,18 @@
 
 int main(void)
 {
-	const Animal *meta = new Animal();
-	const Animal *d = new Dog();
-	const Animal *c = new Cat();
+	Animal *home[12];
 
-	std::cout << d->getType() << " " << std::endl;
-	std::cout << c->getType() << " " << std::endl;
-	d->makeSound();
-	c->makeSound();
-	meta->makeSound();
-
-	delete d;
-	delete c;
-	delete meta;
-
+	for (int i = 0; i < 6; i++)
+		home[i] = new Dog();
+	for (int i = 6; i < 12; i++)
+		home[i] = new Cat();
 	std::cout << std::endl << std::endl;
 
-	const WrongAnimal *wmeta = new WrongAnimal();
-	const WrongAnimal *wc = new WrongCat();
-
-	std::cout << wc->getType() << " " << std::endl;
-	wc->makeSound();
-	wmeta->makeSound();
-
-	delete wc;
-	delete wmeta;
+	for (int i = 0; i < 12; i++)
+		home[i]->makeSound();
 
 	std::cout << std::endl << std::endl;
-
+	for(int i = 0; i < 12; i++)
+		delete home[i];
 }

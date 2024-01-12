@@ -6,7 +6,7 @@
 /*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 14:47:06 by cmichez           #+#    #+#             */
-/*   Updated: 2023/12/18 17:50:50 by cmichez          ###   ########.fr       */
+/*   Updated: 2024/01/07 01:12:57 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,9 @@ protected:
 public:
 	ClapTrap();
 	ClapTrap(std::string target);
+	ClapTrap(const ClapTrap &copy);
 	
+	ClapTrap &operator=(const ClapTrap &copy);
 	void attack(const std::string& target);
 	void takeDamage(unsigned int amount);
 	void beRepaired(unsigned int amount);

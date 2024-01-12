@@ -20,7 +20,9 @@ class Animal
 		std::string type;
 	public:
 		Animal();
+		Animal(const Animal &copy);
 
+		Animal &operator=(const Animal &copy);
 		void setType(std::string type);
 		std::string getType(void) const;
 

@@ -15,12 +15,17 @@
 WrongAnimal::WrongAnimal()
 {
 	type = "Wrong Animal";
-	std::cout << "Default WrongAnimal constructor called\n";
+	std::cout << "Default WrongAnimal constructor called" << std::endl;
 }
 
 WrongAnimal::~WrongAnimal()
 {
 	std::cout << "WrongAnimal destructor called\n";
+}
+
+WrongAnimal::WrongAnimal(const WrongAnimal &copy) : type(copy.getType())
+{
+	std::cout << "Copy WrongAnimal constructor called" << std::endl;
 }
 
 void WrongAnimal::setType(std::string type)
@@ -35,5 +40,12 @@ std::string WrongAnimal::getType(void) const
 
 void WrongAnimal::makeSound(void) const
 {
-	std::cout << "Wrong Animals sounds\n";
+	std::cout << "Wrong Animals sounds" << std::endl;
+}
+
+WrongAnimal &WrongAnimal::operator=(const WrongAnimal &copy)
+{
+	this->type = copy.type;
+
+	return *this;
 }

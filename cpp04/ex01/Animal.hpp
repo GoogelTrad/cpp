@@ -20,8 +20,10 @@ class Animal
 		std::string type;
 	public:
 		Animal();
+		Animal(const Animal &copy);
 
 		void setType(std::string type);
+		Animal &operator=(const Animal &copy);
 		std::string getType(void) const;
 
 		virtual void makeSound(void) const;

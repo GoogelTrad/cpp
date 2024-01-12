@@ -19,7 +19,7 @@ class Zombie
 	private:
 		std::string name;
 	public:
-		Zombie(/* args */);
+		Zombie();
 		void setName(std::string name);
 		std::string getName(void);
 		void annonce(void);

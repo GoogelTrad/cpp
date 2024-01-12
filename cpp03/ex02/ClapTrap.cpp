@@ -6,7 +6,7 @@
 /*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 14:47:29 by cmichez           #+#    #+#             */
-/*   Updated: 2023/12/18 18:09:19 by cmichez          ###   ########.fr       */
+/*   Updated: 2024/01/07 01:53:55 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,15 @@ ClapTrap::ClapTrap()
 	hp = 10;
 	mana = 10;
 	dmg = 0;
+}
+
+ClapTrap::ClapTrap(const ClapTrap &copy)
+{
+	std::cout << "Copy ClapTrap constructor called !" << std::endl;;
+	this->hp = copy.hp;
+	this->mana = copy.mana;
+	this->dmg = copy.dmg;
+	this->name = copy.name;
 }
 
 ClapTrap::ClapTrap(std::string target)
@@ -34,6 +43,17 @@ ClapTrap::~ClapTrap()
 {
 	std::cout << "Destructor called !\n";
 }
+
+ClapTrap &ClapTrap::operator=(const ClapTrap &copy)
+{
+	this->hp = copy.hp;
+	this->mana = copy.mana;
+	this->dmg = copy.dmg;
+	this->name = copy.name;
+
+	return *this;
+}
+
 
 void ClapTrap::attack(const std::string& target)
 {

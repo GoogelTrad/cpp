@@ -17,8 +17,10 @@ class FragTrap : public ClapTrap
 {
 	public:
 		FragTrap();
+		FragTrap(const FragTrap &copy);
 		FragTrap(const std::string name);
 
+		FragTrap &operator=(const FragTrap &copy);
 		void highFivesGuys(void);
 
 		~FragTrap();

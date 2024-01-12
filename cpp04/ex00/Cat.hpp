@@ -19,7 +19,9 @@ private:
 	/* data */
 public:
 	Cat();
+	Cat(const Cat &copy);
 
+	Cat &operator=(const Cat &copy);
 	void makeSound(void) const;
 
 	virtual ~Cat();

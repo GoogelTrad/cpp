@@ -19,7 +19,7 @@ int main(void)
 	std::string &ref = str;
 
 	std::cout << &str << std::endl;
-	std::cout << "stringPTR " << ptr << std::endl;
+	std::cout << "stringPTR " << &ptr << std::endl;
 	std::cout << "stringREF " << &ref << std::endl;
 
 	std::cout << str << std::endl;

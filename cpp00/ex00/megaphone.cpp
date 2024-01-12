@@ -35,6 +35,6 @@ int main(int ac, char **av)
 		}
 	}
 	else
-		std::cout << "* LOUD AND UNBERABLE FEEDBACK NOISE *\n";
+		std::cout << "* LOUD AND UNBERABLE FEEDBACK NOISE *" << std::endl;
 	return 1;
 }

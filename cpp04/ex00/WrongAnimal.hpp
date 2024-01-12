@@ -20,8 +20,10 @@ class WrongAnimal
 	std::string type;
 
 	public:
-		WrongAnimal();
+		WrongAnimal();\
+		WrongAnimal(const WrongAnimal &copy);
 
+		WrongAnimal &operator=(const WrongAnimal &copy);
 		void setType(std::string type);
 		std::string getType(void) const;
 

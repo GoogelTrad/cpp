@@ -12,18 +12,31 @@
 
 #include "Cat.hpp"
 
-Cat::Cat()
+Cat::Cat() : Animal()
 {
-	std::cout << "Default Cat constructor called\n";
+	std::cout << "Default Cat constructor called" << std::endl;
 	this->setType("Cat");
+}
+
+Cat::Cat(const Cat &copy)
+{
+	std::cout << "Copy Cat constructor called" << std::endl;
+	*this = copy;
 }
 
 Cat::~Cat()
 {
-	std::cout << "Cat destructor called\n";
+	std::cout << "Cat destructor called" << std::endl;
+}
+
+Cat &Cat::operator=(const Cat &copy)
+{
+	this->type = copy.type;
+
+	return *this;
 }
 
 void Cat::makeSound(void) const
 {
-	std::cout << "Cat sounds\n";
+	std::cout << "Cat sounds" << std::endl;
 }

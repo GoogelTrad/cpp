@@ -12,18 +12,31 @@
 
 #include "Dog.hpp"
 
-Dog::Dog()
+Dog::Dog() : Animal()
 {
-	std::cout << "Default Dog constructor called\n";
+	std::cout << "Default Dog constructor called" << std::endl;
 	this->setType("Dog");
+}
+
+Dog::Dog(const Dog &copy)
+{
+	std::cout << "Copy Dog constructor called" << std::endl;
+	*this = copy;
 }
 
 Dog::~Dog()
 {
-	std::cout << "Dog destructor called\n";
+	std::cout << "Dog destructor called" << std::endl;
 }
 
 void Dog::makeSound(void) const
 {
-	std::cout << "Dog sounds\n";
+	std::cout << "Dog sounds" << std::endl;
+}
+
+Dog &Dog::operator=(const Dog &copy)
+{
+	this->type = copy.type;
+
+	return *this;
 }

@@ -86,7 +86,7 @@ void PhoneBook::search()
 
 	PhoneBook::affiche(PhoneBook::rep);
 
-	std::cout << "\n";
+	std::cout << std::endl;
 	std::cout << "Index : ";
 	std::cin >> string;
 	index = atoi(string.c_str());
@@ -101,7 +101,5 @@ void PhoneBook::search()
 		std::cout << "Darkest secret : " << ct.getSecret() << std::endl;
 	}
 	else
-	{
-		std::cout << "Wrong index\n";
-	}
+		std::cout << "Wrong index" << std::endl;
 }

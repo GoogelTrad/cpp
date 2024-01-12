@@ -6,7 +6,7 @@
 /*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 23:42:35 by cmichez           #+#    #+#             */
-/*   Updated: 2023/12/12 15:50:18 by cmichez          ###   ########.fr       */
+/*   Updated: 2024/01/02 20:55:14 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ Fixed::~Fixed()
 
 Fixed::Fixed(const Fixed &copie)
 {
-	entier = copie.entier;
+	entier = copie.getRawBits();
 }
 
 void Fixed::operator=(const Fixed &copie)

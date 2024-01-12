@@ -29,7 +29,23 @@ ScavTrap::ScavTrap(std::string name)
 	this->hp = 100;
 	this->mana = 50;
 }
-	
+
+ScavTrap::ScavTrap(const ScavTrap &copy)
+{
+	std::cout << "Copy ScavTrap constructor called !" << std::endl;;
+	*this = copy;
+}
+
+ScavTrap &ScavTrap::operator=(const ScavTrap &copy)
+{
+	this->dmg = copy.dmg;
+	this->hp = copy.hp;
+	this->name = copy.name;
+	this->mana = copy.mana;
+
+	return *this;
+}
+
 void ScavTrap::attack(const std::string &target)
 {
 	if (this->getMana() != 0)

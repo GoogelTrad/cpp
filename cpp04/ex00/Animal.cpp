@@ -14,13 +14,18 @@
 
 Animal::Animal()
 {
-	std::cout << "Default Animal constructor called\n";
+	std::cout << "Default Animal constructor called" << std::endl;
 	type = "Animal";
+}
+
+Animal::Animal(const Animal &copy) : type(copy.getType())
+{
+	std::cout << "Copy Animal constructor called\n";
 }
 
 Animal::~Animal()
 {
-	std::cout << "Animal destructor called\n";
+	std::cout << "Animal destructor called" << std::endl;
 }
 
 void Animal::setType(std::string type)
@@ -35,6 +40,12 @@ std::string Animal::getType(void) const
 
 void Animal::makeSound(void) const
 {
-	std::cout << "Animal sounds\n";
+	std::cout << "Animal sounds" << std::endl;
 }
 
+Animal &Animal::operator=(const Animal &copy)
+{
+	this->type = copy.type;
+
+	return *this;
+}
