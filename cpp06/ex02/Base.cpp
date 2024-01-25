@@ -1,21 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Serializer.cpp                                     :+:      :+:    :+:   */
+/*   Base.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/12 03:30:11 by cmichez           #+#    #+#             */
-/*   Updated: 2024/01/12 03:30:11 by cmichez          ###   ########.fr       */
+/*   Created: 2024/01/25 18:41:32 by cmichez           #+#    #+#             */
+/*   Updated: 2024/01/25 18:41:32 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Serializer.hpp"
+#include "Base.hpp"
 
-Serializer::Serializer()
-{
-}
-
-Serializer::~Serializer()
+Base::~Base()
 {
 }

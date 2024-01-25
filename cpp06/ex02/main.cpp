@@ -1,25 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Serializer.hpp                                     :+:      :+:    :+:   */
+/*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/12 03:29:22 by cmichez           #+#    #+#             */
-/*   Updated: 2024/01/12 03:29:22 by cmichez          ###   ########.fr       */
+/*   Created: 2024/01/25 18:43:26 by cmichez           #+#    #+#             */
+/*   Updated: 2024/01/25 18:43:26 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#pragma	once
+#include "Base.hpp"
+#include "A.hpp"
+#include "B.hpp"
+#include "C.hpp"
 #include <iostream>
+#include <string>
 
-class Serializer
+Base *generate(void)
 {
-private:
-	
-public:
-	Serializer();
-	~Serializer();
-};
 
+}
 
+void identify(Base *p)
+{
+
+}
+
+void identify(Base &p)
+{
+
+}
+
+int main(void)
+{
+
+	return 0;
+}

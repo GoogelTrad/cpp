@@ -1,10 +1,13 @@
-NAME = converter
+NAME = type
 CFLAGS = -Wall -Wextra -Werror -std=c++98
 CC = c++
 RM = rm -f
 
 SRCS =	main.cpp \
-		Serializer.cpp \
+		A.cpp \
+		B.cpp \
+		C.cpp \
+		Base.cpp \
 
 OBJC = ${SRCS:.cpp=.o}
 
