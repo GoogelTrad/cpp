@@ -1,32 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   easyfind.hpp                                       :+:      :+:    :+:   */
+/*   Span.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/03 19:32:29 by cmichez           #+#    #+#             */
-/*   Updated: 2024/02/06 13:28:17 by cmichez          ###   ########.fr       */
+/*   Created: 2024/02/06 14:59:43 by cmichez           #+#    #+#             */
+/*   Updated: 2024/02/06 15:58:15 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
 #include <iostream>
-#include <string>
-#include <exception>
 
-template <typename T>
-int easyfind(T& container, int integer)
+class Span
 {
-	typename T::iterator start = container.begin();
-	int i;
+private:
+	unsigned int N;
+	int *values;
+public:
+	Span(unsigned int _N);
+	~Span();
 
-	while(start != container.end())
-	{
-		if (*start == integer)
-			return i;
-		i++;
-		start++;
-	}
-	throw std::exception();
-}
+	Span(const Span &copy);
+};
+
