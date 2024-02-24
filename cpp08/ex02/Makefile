@@ -1,4 +1,4 @@
-NAME = span
+NAME = mutant
 CFLAGS = -Wall -Wextra -Werror -std=c++98
 CC = c++
 RM = rm -f

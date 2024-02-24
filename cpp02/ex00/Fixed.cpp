@@ -6,7 +6,7 @@
 /*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 23:42:35 by cmichez           #+#    #+#             */
-/*   Updated: 2024/01/02 20:52:03 by cmichez          ###   ########.fr       */
+/*   Updated: 2024/02/24 01:56:01 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ Fixed::~Fixed()
 
 Fixed::Fixed(const Fixed &copie)
 {
-	std::cout << "Copie constructor called" << std::endl;
+	std::cout << "Copy constructor called" << std::endl;
 	entier = copie.getRawBits();
 }
 

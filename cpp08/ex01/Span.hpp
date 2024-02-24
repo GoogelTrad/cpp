@@ -6,7 +6,7 @@
 /*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 14:59:43 by cmichez           #+#    #+#             */
-/*   Updated: 2024/02/22 18:33:31 by cmichez          ###   ########.fr       */
+/*   Updated: 2024/02/24 01:47:42 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ public:
 	int longestSpan(void);
 	void multiplAdd(std::vector<int>::iterator start, std::vector<int>::iterator end);
 
-	Span operator=(const Span &copy);
+	Span &operator=(const Span &copy);
 	Span(const Span &copy);
 };
 

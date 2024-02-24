@@ -14,6 +14,7 @@
 #include <iostream>
 #include <stack>
 #include <iterator>
+#include <list>
 
 
 template <typename T>
@@ -21,7 +22,24 @@ class MutantStack : public std::stack<T>
 {
 public:
 
-	using std::stack<T>::stack;
+	MutantStack()
+	{
+	}
+
+	MutantStack(const MutantStack &copy)
+	{
+		this = copy;
+	}
+
+	~MutantStack()
+	{
+	}
+
+	MutantStack &operator=(const MutantStack &copy)
+	{
+		this = copy;
+		return *this;
+	}
 
 	typedef typename std::stack<T>::container_type::iterator iterator;
 
