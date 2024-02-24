@@ -12,20 +12,26 @@
 
 #pragma once
 #include <iostream>
+#include <stack>
+#include <iterator>
 
-class MutantStack
+
+template <typename T>
+class MutantStack : public std::stack<T>
 {
-private:
-	
 public:
-	MutantStack();
-	~MutantStack();
+
+	using std::stack<T>::stack;
+
+	typedef typename std::stack<T>::container_type::iterator iterator;
+
+	iterator begin() {
+		return this->c.begin();
+	}
+
+	iterator end() {
+		return this->c.end();
+	}
+
+	
 };
-
-MutantStack::MutantStack()
-{
-}
-
-MutantStack::~MutantStack()
-{
-}
