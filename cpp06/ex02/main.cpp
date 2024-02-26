@@ -39,6 +39,8 @@ void identify(Base *p)
 		std::cout << "Class B" << std::endl;
 	else if(dynamic_cast<C*>(p))
 		std::cout << "Class C" << std::endl;
+	else
+		//Quand c'est NULL
 }
 
 void identify(Base &p)
