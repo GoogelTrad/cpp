@@ -12,13 +12,17 @@
 
 #pragma once
 #include <iostream>
+#include <string>
+#include <stack>
 
 class RPN
 {
 private:
-	
+	std::stack<double> stack;
 public:
 	RPN();
+	RPN(const RPN &copy);
+	RPN &operator=(const RPN &copy);
 	~RPN();
 };
 
