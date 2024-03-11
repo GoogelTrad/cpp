@@ -14,6 +14,8 @@
 #include <iostream>
 #include <string>
 #include <stack>
+#include <sstream>
+#include <exception>
 
 class RPN
 {
@@ -23,6 +25,9 @@ public:
 	RPN();
 	RPN(const RPN &copy);
 	RPN &operator=(const RPN &copy);
+	bool isOp(std::string op);
+	double doOp(std::string operateur, double x1, double x2);
+	double calcRes(std::string av);
 	~RPN();
 };
 
