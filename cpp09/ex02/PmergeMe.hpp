@@ -21,5 +21,10 @@ private:
 	std::vector<int> stack;
 public:
 	PmergeMe();
+	PmergeMe(const PmergeMe &copy);
 	~PmergeMe();
+
+	PmergeMe &operator=(const PmergeMe &copy);
+
+	std::vector<int> fillVector(char **av);
 };

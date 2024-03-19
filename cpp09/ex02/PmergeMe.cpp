@@ -13,10 +13,36 @@
 #include "PmergeMe.hpp"
 
 
-PmergeMe::PmergeMe(/* args */)
+PmergeMe::PmergeMe()
 {
+}
+
+PmergeMe::PmergeMe(const PmergeMe &copy)
+{
+    this->stack = copy.stack;
 }
 
 PmergeMe::~PmergeMe()
 {
 }
+
+PmergeMe &PmergeMe::operator=(const PmergeMe &copy)
+{
+    this->stack = copy.stack;
+
+    return *this;
+}
+
+std::vector<int> PmergeMe::fillVector(char **av)
+{
+    std::vector<int> tmp;
+
+    for (int i = 0; av[i]; i++)
+    {
+        int num = std::atoi(av[i]);
+        tmp.push_back(num);
+    }
+
+    return tmp;
+}
+
