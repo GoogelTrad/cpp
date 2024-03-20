@@ -6,7 +6,7 @@
 /*   By: cmichez <cmichez@student-42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 21:47:01 by cmichez           #+#    #+#             */
-/*   Updated: 2024/03/12 21:52:30 by cmichez          ###   ########.fr       */
+/*   Updated: 2024/03/20 01:01:52 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 #include <iostream>
 #include <string>
 #include <vector>
+
+#define K 2
 
 class PmergeMe
 {
@@ -26,5 +28,8 @@ public:
 
 	PmergeMe &operator=(const PmergeMe &copy);
 
-	std::vector<int> fillVector(char **av);
+	void fillVector(char **av);
+	void sortVector(char **av);	
+	void recursDivVector(std::vector<int> toDiv);
+	void recursSortVector(std::vector<int> toSort);
 };
