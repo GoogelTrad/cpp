@@ -6,7 +6,7 @@
 /*   By: cmichez <cmichez@student-42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 21:47:53 by cmichez           #+#    #+#             */
-/*   Updated: 2024/03/20 01:04:53 by cmichez          ###   ########.fr       */
+/*   Updated: 2024/03/20 18:03:26 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,9 @@ void PmergeMe::fillVector(char **av)
 void PmergeMe::sortVector(char **av)
 {
 	this->fillVector(av);
-	recursSortVector(this->stack);
+	std::vector<std::vector<int>>;
+	std::cout << "\n\n";
+	recursDivVector(this->stack);
 }
 
 void PmergeMe::recursDivVector(std::vector<int> toDiv)
@@ -67,7 +69,22 @@ void PmergeMe::recursDivVector(std::vector<int> toDiv)
 	}
 	else
 	{
-		//recursSortVector(firstPart);
-		//recursSortVector(secondPart);
+		recursSortVector(toDiv);
+		
 	}
+}
+
+void PmergeMe::recursSortVector(std::vector<int> toSort)
+{
+	for(int i = 0; i < toSort.size() - 1; i++)
+	{
+		for (int j = 0; j < toSort.size() - i - 1; j++)
+		{
+			if (toSort[j] > toSort[j + 1])
+				std::swap(toSort[j], toSort[j + 1]);
+		}
+	}
+	for(int i = 0; i < toSort.size(); i++)
+		std::cout << "coucou[i] = " << toSort[i] << std::endl;
+	std::cout << "\n";
 }
