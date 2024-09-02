@@ -36,7 +36,7 @@ public:
 	{
 		len = copy.len;
 		arr = new T[len];
-		for(int i = 0; i < len; i++)
+		for(unsigned int i = 0; i < len; i++)
 			arr[i] = copy.arr[i];
 	}
 
@@ -44,7 +44,7 @@ public:
 	{
 		len = copy.len;
 		arr = new T[len];
-		for(int i = 0; i < len; i++)
+		for(unsigned int i = 0; i < len; i++)
 			arr[i] = copy.arr[i];
 
 		return *this;
@@ -55,12 +55,11 @@ public:
 		delete[] this->arr;
 	}
 
-	class ArrayException : std::exception
+	class ArrayException : public std::exception
 	{
-		public :
-			const char* what(void) const noexcept override {
-				return "Array Exception!";
-			}
+		const char* what(void) const throw() {
+			return "Array Exception!";
+		}
 	};
 
 	T &operator[](unsigned int i) const

@@ -23,9 +23,9 @@ Base *generate(void)
 {
 	std::srand(static_cast<unsigned>(time(0)));
 	int random = std::rand();
-	if (random % 2 == 0)
+	if (random % 3 == 0)
 		return new A;
-	else if (random % 3 == 0)
+	else if (random % 2 == 0)
 		return new B;
 	else 
 		return new C;
@@ -40,7 +40,7 @@ void identify(Base *p)
 	else if(dynamic_cast<C*>(p))
 		std::cout << "Class C" << std::endl;
 	else
-		//Quand c'est NULL
+		std::cout << "NULL" << std::endl;
 }
 
 void identify(Base &p)

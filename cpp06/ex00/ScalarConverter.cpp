@@ -68,11 +68,11 @@ void ScalarConverter::convert(std::string str)
 	if (toInt == toFloat)
 	{
 		std::cout << "double : " << toDouble << ".0" << std::endl;
-		std::cout << "double : " << toFloat << ".0f" << std::endl;
+		std::cout << "float : " << toFloat << ".0f" << std::endl;
 	}
 	else
 	{
 		std::cout << "double : " << toDouble << std::endl;
-		std::cout << "double : " << toFloat << "f" << std::endl;
+		std::cout << "float : " << toFloat << "f" << std::endl;
 	}
 }

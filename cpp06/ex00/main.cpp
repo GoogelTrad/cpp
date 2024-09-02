@@ -15,7 +15,6 @@
 int main(int ac, char **av)
 {
 
-	ScalarConverter Coucou;
 
 	if (ac != 2)
 	{
@@ -23,7 +22,7 @@ int main(int ac, char **av)
 		return 0;
 	}
 
-	Coucou.convert(av[1]);
+	ScalarConverter::convert(av[1]);
 
 	return 0;
 }

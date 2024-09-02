@@ -17,10 +17,10 @@
 class ScalarConverter
 {
 private:
-
-public:
 	ScalarConverter();
 	ScalarConverter(const ScalarConverter &copy);
+
+public:
 	~ScalarConverter();
 
 	ScalarConverter &operator=(const ScalarConverter &copy);

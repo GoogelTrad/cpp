@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #pragma once
+#include <cstdlib>
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -31,7 +32,7 @@ class BitcoinExchange
 		std::map<std::string, double> getMap();
 
 		bool isDate(std::string date);
-		void finalPrinting(std::string file);
+		void finalPrinting(const char* file);
 		double chooseDate(std::string date);
 		~BitcoinExchange();
 

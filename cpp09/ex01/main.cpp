@@ -15,7 +15,7 @@
 int main(int ac, char **av)
 {
 	if (ac != 2)
-		throw std::invalid_argument("Error! ");
+		std::cerr << "Bad arguments !" << std::endl;
 	else
 	{
 		RPN coucou = RPN();

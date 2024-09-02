@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   PmergeMe.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
+/*   By: cmichez <cmichez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 21:47:53 by cmichez           #+#    #+#             */
-/*   Updated: 2024/03/21 18:11:16 by cmichez          ###   ########.fr       */
+/*   Updated: 2024/09/02 20:30:01 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,23 @@ PmergeMe &PmergeMe::operator=(const PmergeMe &copy)
 /****************Partie Vector***************************/
 /********************************************************/
 
-int PmergeMe::fillVector(char **av, double &durationVector)
+std::vector<int> PmergeMe::generateVectorJacob(int n)
 {
-	auto start = std::chrono::high_resolution_clock::now();	
+	std::vector<int> jacob;
+	jacob.push_back(0);
+	jacob.push_back(1);
+	for (int i = 2; i <= n; i++)
+	{
+		jacob.push_back(jacob[i - 1] + 2 * jacob[i - 2]);
+		if (jacob[i] > n)
+			break;
+	}
+
+	return jacob;
+}
+
+int PmergeMe::fillVector(char **av)
+{
 	for (int i = 1; av[i]; i++)
 	{
 		int num = std::atoi(av[i]);
@@ -49,36 +63,35 @@ int PmergeMe::fillVector(char **av, double &durationVector)
 			return -1;
 		this->stack.push_back(num);
 	}
-	auto end = std::chrono::high_resolution_clock::now();
-	std::chrono::duration<double, std::micro> duration = end - start;
-	durationVector = duration.count();
-	//std::cout << "Time to fill " << this->stack.size() << " elements with std::vector = " << microseconds / 1000 << "us\n";
+
 	return 1;
 }
 
 void PmergeMe::sortVector(char **av)
 {
 	int index = 0;
-	double durationVector;
 
-	if (!this->fillVector(av, durationVector))
+	std::clock_t start = std::clock();
+	if (!this->fillVector(av))
 	{
 		std::cout << "Error!" << std::endl;
 		return;
 	}
-	std::vector<std::vector<int>> arr;
 
-	auto start = std::chrono::high_resolution_clock::now();	
-	
+	std::vector<int> jacob = generateVectorJacob(this->stack.size());
+	std::vector<std::vector<int> > arr;
+	for(unsigned int i = 0 ; i < jacob.size(); i++)
+	{
+		std::cout << jacob[i] << " ";
+	}
 	recursDivVector(arr, this->stack, index);
 	this->stack = mergeSortedVector(arr);
 	
-	auto end = std::chrono::high_resolution_clock::now();
-	std::chrono::duration<double, std::micro> duration = end - start;
-	double microseconds = duration.count();
+	std::clock_t end = std::clock();
 
+	double elapsed_time = static_cast<double>(end - start) / CLOCKS_PER_SEC;
 	std::cout << "After : ";
-	for(int i = 0 ; i < 4; i++)
+	for(unsigned int i = 0 ; i < 4; i++)
 	{
 		std::cout << this->stack[i] << " ";
 	}
@@ -86,21 +99,20 @@ void PmergeMe::sortVector(char **av)
 		std::cout << "[...]\n";
 	else
 		std::cout << "\n";
+	std::cout << "Time to process a range of " << this->stack.size() << " elements with std::vector = " << elapsed_time * 1000 << "us" << std::endl; 
 
-	std::cout << "Time to fill " << this->stack.size() << " elements with std::vector = " << durationVector / 1000 << "us\n";
-	std::cout << "Time to sort " << this->stack.size() << " elements with std::vector = " << microseconds / 1000 << "us\n";
 }
 
-void PmergeMe::recursDivVector(std::vector<std::vector<int>> &arr, std::vector<int> toDiv, int &index)
+void PmergeMe::recursDivVector(std::vector<std::vector<int> > &arr, std::vector<int> toDiv, int &index)
 {
 	std::vector<int> firstPart;
 	std::vector<int> secondPart;
 
 	if(toDiv.size() > 1)
 	{
-		for(int i = 0; i < toDiv.size() / 2; i++)
+		for(unsigned int i = 0; i < toDiv.size() / 2; i++)
 			firstPart.push_back(toDiv[i]);
-		for(int i = toDiv.size() / 2; i < toDiv.size(); i++)
+		for(unsigned int i = toDiv.size() / 2; i < toDiv.size(); i++)
 		{
 			if (!toDiv[i])
 				break;
@@ -116,11 +128,11 @@ void PmergeMe::recursDivVector(std::vector<std::vector<int>> &arr, std::vector<i
 	}
 }
 
-std::vector<int> PmergeMe::mergeSortedVector(std::vector<std::vector<int>> &arr)
+std::vector<int> PmergeMe::mergeSortedVector(std::vector<std::vector<int> > &arr)
 {
 	std::vector<int> res;
 
-	for(int i = 0; i < arr.size(); i++)
+	for(unsigned int i = 0; i < arr.size(); i++)
 		res = recursSortVector(res, arr[i]);
 
 	return res;
@@ -130,8 +142,8 @@ std::vector<int> PmergeMe::recursSortVector(std::vector<int> v1, std::vector<int
 {
 	std::vector<int> res;
 
-	int i = 0;
-	int j = 0;
+	unsigned int i = 0;
+	unsigned int j = 0;
 
 	while(i < v1.size() && j < v2.size())
 	{
@@ -154,53 +166,48 @@ std::vector<int> PmergeMe::recursSortVector(std::vector<int> v1, std::vector<int
 
 int PmergeMe::fillDeque(char **av)
 {
-	auto start = std::chrono::high_resolution_clock::now();	
-	for (int i = 1; av[i]; i++)
+	for (unsigned int i = 1; av[i]; i++)
 	{
 		int num = std::atoi(av[i]);
 		if (num < 0)
 			return -1;
 		this->myDeque.push_back(num);
 	}
-	auto end = std::chrono::high_resolution_clock::now();
-	std::chrono::duration<double, std::micro> duration = end - start;
-	double microseconds = duration.count();
-	std::cout << "Time to fill " << this->myDeque.size() << " elements with std::deque = " << microseconds * 1000 / CLOCKS_PER_SEC << "us\n";
+
 	return 1;
 }
 
 void PmergeMe::sortDeque(char **av)
 {
 	int index = 0;
+	std::clock_t start = std::clock();
 	if(this->fillDeque(av) == -1)
 	{
 		std::cout << "Error!" << std::endl;
 		return;
 	}
 	
-	std::deque<std::deque<int>> arr;
-	
-	auto start = std::chrono::high_resolution_clock::now();	
+	std::deque<std::deque<int> > arr;
 	
 	recursDivDeque(arr, this->myDeque, index);
 	this->myDeque = mergeSortedDeque(arr);
+
+	std::clock_t end = std::clock();
+	double elapsed_time = static_cast<double>(end - start) / CLOCKS_PER_SEC;
+	std::cout << "Time to process a range of " << this->stack.size() << " elements with std::deque = " << elapsed_time * 1000 << "us" << std::endl; 
 	
-	auto end = std::chrono::high_resolution_clock::now();
-	std::chrono::duration<double, std::micro> duration = end - start;
-	double microseconds = duration.count();
-	std::cout << "Time to sort " << this->myDeque.size() << " elements with std::deque = " << microseconds * 1000 / CLOCKS_PER_SEC << "us\n";
 }
 
-void PmergeMe::recursDivDeque(std::deque<std::deque<int>> &arr, std::deque<int> toDiv, int &index)
+void PmergeMe::recursDivDeque(std::deque<std::deque<int> > &arr, std::deque<int> toDiv, int &index)
 {
 	std::deque<int> firstPart;
 	std::deque<int> secondPart;
 
 	if(toDiv.size() > 1)
 	{
-		for(int i = 0; i < toDiv.size() / 2; i++)
+		for(unsigned int i = 0; i < toDiv.size() / 2; i++)
 			firstPart.push_back(toDiv[i]);
-		for(int i = toDiv.size() / 2; i < toDiv.size(); i++)
+		for(unsigned int i = toDiv.size() / 2; i < toDiv.size(); i++)
 		{
 			if (!toDiv[i])
 				break;
@@ -216,11 +223,11 @@ void PmergeMe::recursDivDeque(std::deque<std::deque<int>> &arr, std::deque<int> 
 	}
 }
 
-std::deque<int> PmergeMe::mergeSortedDeque(std::deque<std::deque<int>> &arr)
+std::deque<int> PmergeMe::mergeSortedDeque(std::deque<std::deque<int> > &arr)
 {
 	std::deque<int> res;
 
-	for(int i = 0; i < arr.size(); i++)
+	for(unsigned int i = 0; i < arr.size(); i++)
 		res = recursSortDeque(res, arr[i]);
 
 	return res;
@@ -230,8 +237,8 @@ std::deque<int> PmergeMe::recursSortDeque(std::deque<int> v1, std::deque<int> v2
 {
 	std::deque<int> res;
 
-	int i = 0;
-	int j = 0;
+	unsigned int i = 0;
+	unsigned int j = 0;
 
 	while(i < v1.size() && j < v2.size())
 	{

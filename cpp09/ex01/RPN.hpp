@@ -12,6 +12,7 @@
 
 #pragma once
 #include <iostream>
+#include <cstdlib>
 #include <string>
 #include <stack>
 #include <sstream>

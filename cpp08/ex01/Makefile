@@ -8,6 +8,9 @@ SRCS =	main.cpp \
 
 OBJC = ${SRCS:.cpp=.o}
 
+.cpp.o:
+	c++ $(CFLAGS) -c $< -o $@
+
 all: ${NAME}
 
 ${NAME}: ${OBJC}

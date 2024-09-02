@@ -18,7 +18,7 @@ BitcoinExchange::BitcoinExchange()
 
 BitcoinExchange::BitcoinExchange(const BitcoinExchange &copy)
 {
-	*this = copy;
+	this->data.insert(copy.data.begin(), copy.data.end());	
 }
 
 BitcoinExchange::~BitcoinExchange()
@@ -27,7 +27,7 @@ BitcoinExchange::~BitcoinExchange()
 
 BitcoinExchange &BitcoinExchange::operator=(const BitcoinExchange &copy)
 {
-	*this = copy;
+	this->data.insert(copy.data.begin(), copy.data.end());	
 	return *this;
 }
 
@@ -63,7 +63,7 @@ std::map<std::string, double> BitcoinExchange::getDataValues()
 	return map;
 }
 
-void BitcoinExchange::finalPrinting(std::string file)
+void BitcoinExchange::finalPrinting(const char* file)
 {
 	std::fstream fd;
 	std::string ligne;

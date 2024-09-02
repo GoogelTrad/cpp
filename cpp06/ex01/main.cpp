@@ -14,16 +14,16 @@
 
 int main(void)
 {
-	Serializer s;
 	Data data;
+	Data data2;
 	uintptr_t ptr;
 
 	data.nb = 2;
 	data.string = "coucou";
 
 	std::cout << "nb = " << data.nb << " string = " << data.string << std::endl;
-	ptr = s.serialize(&data);
+	ptr = Serializer::serialize(&data);
 	std::cout << "ptr = " << ptr << std::endl;
-	data = *s.deserialize(ptr);
-	std::cout << "nb = " << data.nb << " string = " << data.string << std::endl;
+	data2 = *Serializer::deserialize(ptr);
+	std::cout << "nb = " << data2.nb << " string = " << data2.string << std::endl;
 }

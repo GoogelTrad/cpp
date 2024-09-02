@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Span.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
+/*   By: cmichez <cmichez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 15:00:00 by cmichez           #+#    #+#             */
-/*   Updated: 2024/02/22 18:41:35 by cmichez          ###   ########.fr       */
+/*   Updated: 2024/08/30 16:16:25 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ Span::~Span()
 {
 }
 
-Span Span::operator=(const Span &copy)
+Span &Span::operator=(const Span &copy)
 {
 	this->N = copy.N;
 	this->values = copy.values;
@@ -49,10 +49,10 @@ int Span::shortestSpan(void)
 		- *std::min_element(this->values.begin(), this->values.end()));
 		
 	int tmp;
-	for(int i = 0; i < this->N; i++)
+	for(unsigned int i = 0; i < this->N; i++)
 	{
 		tmp = this->values[i];
-		for (int j = i + 1; j < this->N; j++)
+		for (unsigned int j = i + 1; j < this->N; j++)
 		{
 			if (std::abs(tmp - this->values[j]) > 0 && std::abs(tmp - this->values[j]) < diff)
 				diff = std::abs(tmp - this->values[j]);

@@ -30,7 +30,7 @@ int main(void)
 		Span large = Span(10000);
 
 		std::vector<int> tmp;
-		for(int i = 0; i < 10000; i++)
+		for(unsigned int i = 0; i < 10000; i++)
 			tmp.push_back(i * 3);
 		large.multiplAdd(tmp.begin(), tmp.end());
 
