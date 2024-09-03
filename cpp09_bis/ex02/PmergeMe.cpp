@@ -6,7 +6,7 @@
 /*   By: cmichez <cmichez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 21:47:53 by cmichez           #+#    #+#             */
-/*   Updated: 2024/09/03 17:28:07 by cmichez          ###   ########.fr       */
+/*   Updated: 2024/09/03 18:54:27 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,10 @@ PmergeMe::PmergeMe()
 
 PmergeMe::PmergeMe(const PmergeMe &copy)
 {
-	this->stack = copy.stack;
-	this->myDeque = copy.myDeque;
+	for(unsigned int i = 0; i < copy.stack.size(); i++)
+		this->stack[i] = copy.stack[i];
+	for(unsigned int i = 0; i < copy.myDeque.size(); i++)
+		this->myDeque[i] = copy.myDeque[i];
 }
 
 PmergeMe::~PmergeMe()
@@ -29,8 +31,11 @@ PmergeMe::~PmergeMe()
 
 PmergeMe &PmergeMe::operator=(const PmergeMe &copy)
 {
-	this->stack = copy.stack;
-	this->myDeque = copy.myDeque;
+	std::cout << "coucou copy\n";
+	for(unsigned int i = 0; i < copy.stack.size(); i++)
+		this->stack[i] = copy.stack[i];
+	for(unsigned int i = 0; i < copy.myDeque.size(); i++)
+		this->myDeque[i] = copy.myDeque[i];
 
 	return *this;
 }
@@ -42,6 +47,7 @@ PmergeMe &PmergeMe::operator=(const PmergeMe &copy)
 std::vector<int> PmergeMe::generateVectorJacob(int n)
 {
 	std::vector<int> jacob;
+	//std::vector<int> index_list;
 	jacob.push_back(0);
 	jacob.push_back(1);
 	for (int i = 2; i <= n; i++)
@@ -50,7 +56,8 @@ std::vector<int> PmergeMe::generateVectorJacob(int n)
 		if (jacob[i] > n)
 			break;
 	}
-
+	//for
+	
 	return jacob;
 }
 
@@ -69,15 +76,12 @@ int PmergeMe::fillVector(char **av)
 
 void PmergeMe::sortVector(char **av)
 {
-	int index = 0;
-
 	std::clock_t start = std::clock();
 	if (!this->fillVector(av))
 	{
 		std::cout << "Error!" << std::endl;
 		return;
 	}
-
 	std::vector<int> jacob = generateVectorJacob(this->stack.size());
 	std::vector<std::vector<int> > arr;
 	std::cout << "Jacob ";
@@ -86,29 +90,44 @@ void PmergeMe::sortVector(char **av)
 		std::cout << jacob[i] << " ";
 	}
 	std::cout << std::endl;
-	recursDivVector(arr, this->stack, index);
+	divVector(arr, this->stack);
 	std::cout << "stack ";
-	for(unsigned int i = 0 ; i < this->stack.size(); i++)
+	for(unsigned int i = 0 ; i < arr.size(); i++)
 	{
-		std::cout << this->stack[i] << " ";
+		for(unsigned int j = 0; j < arr[i].size(); j++)
+			std::cout << arr[i][j] << " ";
+		std::cout << std::endl;
 	}
-	std::cout << std::endl;
 	this->stack = mergeSortedVector(arr);
 	
 	std::clock_t end = std::clock();
 
 	double elapsed_time = static_cast<double>(end - start) / CLOCKS_PER_SEC;
-	std::cout << "After : ";
-	for(unsigned int i = 0 ; i < 4; i++)
-	{
-		std::cout << this->stack[i] << " ";
-	}
-	if (this->stack[4])
-		std::cout << "[...]\n";
-	else
-		std::cout << "\n";
 	std::cout << "Time to process a range of " << this->stack.size() << " elements with std::vector = " << elapsed_time * 1000 << "us" << std::endl; 
 
+}
+
+void PmergeMe::divVector(std::vector<std::vector<int> > &arr, std::vector<int> &toDiv)
+{
+	std::vector<int> tmp;
+	if (toDiv.size() > 1)
+	{
+		for(unsigned int i = 0; i < 2; i++)
+		{
+			if (toDiv[i])	
+				tmp.push_back(toDiv[i]);
+		}
+	}
+	else
+		tmp.push_back(toDiv[0]);
+	arr.push_back(tmp);
+	for(unsigned int i = 0; i < 2; i++)
+	{
+		if (!toDiv.empty())
+			toDiv.erase(toDiv.begin());
+	}
+	if (!toDiv.empty())
+		divVector(arr, toDiv);
 }
 
 void PmergeMe::recursDivVector(std::vector<std::vector<int> > &arr, std::vector<int> toDiv, int &index)
@@ -116,7 +135,7 @@ void PmergeMe::recursDivVector(std::vector<std::vector<int> > &arr, std::vector<
 	std::vector<int> firstPart;
 	std::vector<int> secondPart;
 
-	if(toDiv.size() > 1)
+	if(toDiv.size() > 2)
 	{
 		for(unsigned int i = 0; i < toDiv.size() / 2; i++)
 			firstPart.push_back(toDiv[i]);

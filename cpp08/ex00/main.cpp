@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
+/*   By: cmichez <cmichez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 22:12:01 by cmichez           #+#    #+#             */
-/*   Updated: 2024/02/06 13:29:08 by cmichez          ###   ########.fr       */
+/*   Updated: 2024/09/03 16:41:03 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,6 @@ int main(void)
 	}
 	catch(std::exception& e)
 	{
-		std::cout << "Error Value not found!" << std::endl;
+		std::cerr << "Error Value not found!" << std::endl;
 	}	
 }
