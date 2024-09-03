@@ -17,6 +17,7 @@
 #include <deque>
 #include <ctime>
 #include <cstdlib>
+#include <algorithm> 
 
 #define K 2
 
@@ -40,6 +41,8 @@ public:
 	std::vector<int> recursSortVector(std::vector<int> v1, std::vector<int> v2);
 	std::vector<int> mergeSortedVector(std::vector<std::vector<int> > &arr);
 	void divVector(std::vector<std::vector<int> > &arr, std::vector<int> &toDiv);
+	void sortOddVector(std::vector<std::vector<int> > &arr, std::vector<int> &main, std::vector<int> &pend);
+	void mergeVector(std::vector<int> &main, std::vector<int> &pend);
 
 	//Partie Deque
 	int fillDeque(char **av);

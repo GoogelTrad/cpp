@@ -82,15 +82,21 @@ void PmergeMe::sortVector(char **av)
 		std::cout << "Error!" << std::endl;
 		return;
 	}
+
 	std::vector<int> jacob = generateVectorJacob(this->stack.size());
 	std::vector<std::vector<int> > arr;
+	std::vector<int> main;
+	std::vector<int> pend;
+
 	std::cout << "Jacob ";
 	for(unsigned int i = 0 ; i < jacob.size(); i++)
 	{
 		std::cout << jacob[i] << " ";
 	}
 	std::cout << std::endl;
+
 	divVector(arr, this->stack);
+
 	std::cout << "stack ";
 	for(unsigned int i = 0 ; i < arr.size(); i++)
 	{
@@ -98,13 +104,37 @@ void PmergeMe::sortVector(char **av)
 			std::cout << arr[i][j] << " ";
 		std::cout << std::endl;
 	}
-	this->stack = mergeSortedVector(arr);
-	
+
+	sortOddVector(arr, main, pend);
+	//this->stack = mergeSortedVector(arr);
+
+
+
+	std::cout << "pend" << std::endl;
+	for(unsigned int i = 0; i < pend.size(); i++)
+	{
+		std::cout << pend[i] << " ";
+	}
+	std::cout << std::endl;
+	std::cout << "main" << std::endl;
+	for(unsigned int i = 0; i < main.size(); i++)
+	{
+		std::cout << main[i] << " ";
+	}
+	std::cout << std::endl;
+
 	std::clock_t end = std::clock();
 
 	double elapsed_time = static_cast<double>(end - start) / CLOCKS_PER_SEC;
 	std::cout << "Time to process a range of " << this->stack.size() << " elements with std::vector = " << elapsed_time * 1000 << "us" << std::endl; 
 
+}
+
+void PmergeMe::mergeVector(std::vector<int> &main, std::vector<int> &pend)
+{
+	
+	if (pend[0] < main[0])
+		main.insert(main.begin(), pend[0]);
 }
 
 void PmergeMe::divVector(std::vector<std::vector<int> > &arr, std::vector<int> &toDiv)
@@ -128,6 +158,23 @@ void PmergeMe::divVector(std::vector<std::vector<int> > &arr, std::vector<int> &
 	}
 	if (!toDiv.empty())
 		divVector(arr, toDiv);
+}
+
+void PmergeMe::sortOddVector(std::vector<std::vector<int> > &arr, std::vector<int> &main, std::vector<int> &pend)
+{
+	for (unsigned int i = 0; i < arr.size(); i++)
+	{
+		if(arr[i][0] > arr[i][1])
+		{
+			main.push_back(arr[i][0]);
+			pend.push_back(arr[i][1]);
+		}
+		else
+		{
+			pend.push_back(arr[i][0]);
+			main.push_back(arr[i][1]);			
+		}
+	}
 }
 
 void PmergeMe::recursDivVector(std::vector<std::vector<int> > &arr, std::vector<int> toDiv, int &index)
