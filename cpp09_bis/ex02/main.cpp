@@ -6,7 +6,7 @@
 /*   By: cmichez <cmichez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 13:43:10 by cmichez           #+#    #+#             */
-/*   Updated: 2024/09/03 17:29:23 by cmichez          ###   ########.fr       */
+/*   Updated: 2024/09/04 18:57:19 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,13 @@ int main(int ac, char **av)
 		PmergeMe coucou;
 
 		std::cout << "Before : ";
-		for(int i = 1 ; i < ac; i++)
+		for(int i = 1 ; i < 5; i++)
 		{
 			std::cout << av[i] << " ";
 		}
-		// if (av[5])
-		// 	std::cout << "[...]\n";
-		// else
+		if (av[5])
+		 	std::cout << "[...]\n";
+		else
 		 	std::cout << "\n";
 
 		
