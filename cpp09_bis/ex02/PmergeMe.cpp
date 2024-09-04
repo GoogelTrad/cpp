@@ -6,7 +6,7 @@
 /*   By: cmichez <cmichez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 21:47:53 by cmichez           #+#    #+#             */
-/*   Updated: 2024/09/04 18:58:26 by cmichez          ###   ########.fr       */
+/*   Updated: 2024/09/04 19:56:21 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,24 +52,31 @@ std::vector<int> PmergeMe::generateVectorJacob(int n)
 	jacob.push_back(0);
 	jacob.push_back(1);
 	for (int i = 2; i <= n; i++)
-	{
 		jacob.push_back(jacob[i - 1] + 2 * jacob[i - 2]);
-		if (jacob[i] > n)
-			break;
-	}
 	jacob.erase(jacob.begin());
 	jacob.erase(jacob.begin());
 	
-	for(int i = 1; combinaison.size() < (static_cast<unsigned int> (n)); i++)
+	if (n <= 2)
 	{
-		index = jacob[i] - 1;
-		combinaison.push_back(jacob[i]);
-		while(index != jacob[i - 1])
-		{
-			combinaison.push_back(index);
-			index--;
-		}
+		combinaison.push_back(3); 
+		combinaison.push_back(2);
 	}
+	else
+	{
+		for(int i = 1; combinaison.size() < (static_cast<unsigned int> (n) - 1); i++)
+		{
+			std::cout << jacob[i - 1] << " coucou\n";
+			index = jacob[i] - 1;
+			combinaison.push_back(jacob[i]);
+			while(index != jacob[i - 1])
+			{
+				//std::cout << "coucou2\n";
+				combinaison.push_back(index);
+				index--;
+			}
+		}	
+	}
+
 	
 	return combinaison;
 }
@@ -94,24 +101,26 @@ void PmergeMe::sortVector(char **av)
 		std::cout << "Error!" << std::endl;
 		return;
 	}
-
+	
 	std::vector<std::vector<int> > arr;
 	std::vector<int> main;
 	std::vector<int> pend;
 	int struggle;
 
 	std::clock_t start = std::clock();
-	divVector(arr, this->stack, struggle);
-	sortOddVector(arr);
-	makePendMainVector(arr, main, pend);
-	std::vector<int> jacob = generateVectorJacob(pend.size());
-	sortBinarySearchVector(main, pend, jacob, struggle);
-	std::swap(main, this->stack);
-
+	if (this->stack.size() >= 2)
+	{
+		divVector(arr, this->stack, struggle);
+		sortOddVector(arr);
+		makePendMainVector(arr, main, pend);
+		std::vector<int> jacob = generateVectorJacob(pend.size());
+		sortBinarySearchVector(main, pend, jacob, struggle);
+		std::swap(main, this->stack);		
+	}
 	std::clock_t end = std::clock();
 
 	std::cout << "After : ";
-	for(unsigned int i = 0; i < 5; i++)
+	for(unsigned int i = 0; i < this->stack.size(); i++)
 		std::cout << this->stack[i] << " ";
 	if (this->stack[5])
 		std::cout << "[...]";
@@ -212,15 +221,17 @@ std::deque<int> PmergeMe::generateDequeJacob(int n)
 	jacob.push_back(0);
 	jacob.push_back(1);
 	for (int i = 2; i <= n; i++)
-	{
 		jacob.push_back(jacob[i - 1] + 2 * jacob[i - 2]);
-		if (jacob[i] > n)
-			break;
-	}
 	jacob.erase(jacob.begin());
 	jacob.erase(jacob.begin());
 	
-	for(int i = 1; combinaison.size() < (static_cast<unsigned int> (n)); i++)
+	if (n <= 2)
+	{
+		combinaison.push_back(3); 
+		combinaison.push_back(2);
+	}
+
+	for(int i = 1; combinaison.size() < (static_cast<unsigned int> (n) - 1); i++)
 	{
 		index = jacob[i] - 1;
 		combinaison.push_back(jacob[i]);
@@ -261,12 +272,15 @@ void PmergeMe::sortDeque(char **av)
 	int struggle;
 
 	std::clock_t start = std::clock();
-	divDeque(arr, this->myDeque, struggle);
-	sortOddDeque(arr);
-	makePendMainDeque(arr, main, pend);
-	std::deque<int> jacob = generateDequeJacob(pend.size());
-	sortBinarySearchDeque(main, pend, jacob, struggle);
-	std::swap(main, this->myDeque);
+	if (this->myDeque.size() >= 2)
+	{
+		divDeque(arr, this->myDeque, struggle);
+		sortOddDeque(arr);
+		makePendMainDeque(arr, main, pend);
+		std::deque<int> jacob = generateDequeJacob(pend.size());
+		sortBinarySearchDeque(main, pend, jacob, struggle);
+		std::swap(main, this->myDeque);
+	}
 
 	std::clock_t end = std::clock();
 	double elapsed_time = static_cast<double>(end - start) / CLOCKS_PER_SEC;
