@@ -6,14 +6,14 @@
 /*   By: cmichez <cmichez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 21:47:53 by cmichez           #+#    #+#             */
-/*   Updated: 2024/09/03 18:54:27 by cmichez          ###   ########.fr       */
+/*   Updated: 2024/09/04 18:45:19 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PmergeMe.hpp"
 
 
-PmergeMe::PmergeMe()
+PmergeMe::PmergeMe() : isStruggle(false)
 {
 }
 
@@ -46,8 +46,9 @@ PmergeMe &PmergeMe::operator=(const PmergeMe &copy)
 
 std::vector<int> PmergeMe::generateVectorJacob(int n)
 {
+	int index;
 	std::vector<int> jacob;
-	//std::vector<int> index_list;
+	std::vector<int> combinaison;
 	jacob.push_back(0);
 	jacob.push_back(1);
 	for (int i = 2; i <= n; i++)
@@ -56,9 +57,21 @@ std::vector<int> PmergeMe::generateVectorJacob(int n)
 		if (jacob[i] > n)
 			break;
 	}
-	//for
+	jacob.erase(jacob.begin());
+	jacob.erase(jacob.begin());
 	
-	return jacob;
+	for(int i = 1; combinaison.size() < (static_cast<unsigned int> (n)); i++)
+	{
+		index = jacob[i] - 1;
+		combinaison.push_back(jacob[i]);
+		while(index != jacob[i - 1])
+		{
+			combinaison.push_back(index);
+			index--;
+		}
+	}
+	
+	return combinaison;
 }
 
 int PmergeMe::fillVector(char **av)
@@ -83,61 +96,41 @@ void PmergeMe::sortVector(char **av)
 		return;
 	}
 
-	std::vector<int> jacob = generateVectorJacob(this->stack.size());
 	std::vector<std::vector<int> > arr;
 	std::vector<int> main;
 	std::vector<int> pend;
+	int struggle;
 
-	std::cout << "Jacob ";
-	for(unsigned int i = 0 ; i < jacob.size(); i++)
-	{
-		std::cout << jacob[i] << " ";
-	}
-	std::cout << std::endl;
-
-	divVector(arr, this->stack);
-
-	std::cout << "stack ";
-	for(unsigned int i = 0 ; i < arr.size(); i++)
-	{
-		for(unsigned int j = 0; j < arr[i].size(); j++)
-			std::cout << arr[i][j] << " ";
-		std::cout << std::endl;
-	}
-
-	sortOddVector(arr, main, pend);
-	//this->stack = mergeSortedVector(arr);
-
-
-
-	std::cout << "pend" << std::endl;
-	for(unsigned int i = 0; i < pend.size(); i++)
-	{
-		std::cout << pend[i] << " ";
-	}
-	std::cout << std::endl;
-	std::cout << "main" << std::endl;
-	for(unsigned int i = 0; i < main.size(); i++)
-	{
-		std::cout << main[i] << " ";
-	}
-	std::cout << std::endl;
+	divVector(arr, this->stack, struggle);
+	sortOddVector(arr);
+	makePendMainVector(arr, main, pend);
+	std::vector<int> jacob = generateVectorJacob(pend.size());
+	sortBinarySearchVector(main, pend, jacob, struggle);
+	std::swap(main, this->stack);
 
 	std::clock_t end = std::clock();
 
+	std::cout << "After : ";
+	for(unsigned int i = 0; i < this->stack.size(); i++)
+		std::cout << this->stack[i] << " ";
+	std::cout << "\n";
 	double elapsed_time = static_cast<double>(end - start) / CLOCKS_PER_SEC;
 	std::cout << "Time to process a range of " << this->stack.size() << " elements with std::vector = " << elapsed_time * 1000 << "us" << std::endl; 
 
 }
 
-void PmergeMe::mergeVector(std::vector<int> &main, std::vector<int> &pend)
+void PmergeMe::sortBinarySearchVector(std::vector<int> &main, std::vector<int> &pend, std::vector<int> &jacob, int &struggle)
 {
-	
-	if (pend[0] < main[0])
-		main.insert(main.begin(), pend[0]);
+	for(unsigned int i = 0; i < jacob.size(); i++)
+	{
+		if (static_cast<unsigned int>(jacob[i] - 1) < pend.size())
+			main.insert(std::lower_bound(main.begin(), main.end(), pend[jacob[i] - 1]), pend[jacob[i] - 1]);
+	}
+	if (this->isStruggle)
+		main.insert(std::lower_bound(main.begin(), main.end(), struggle), struggle);
 }
 
-void PmergeMe::divVector(std::vector<std::vector<int> > &arr, std::vector<int> &toDiv)
+void PmergeMe::divVector(std::vector<std::vector<int> > &arr, std::vector<int> &toDiv, int &struggle)
 {
 	std::vector<int> tmp;
 	if (toDiv.size() > 1)
@@ -149,19 +142,44 @@ void PmergeMe::divVector(std::vector<std::vector<int> > &arr, std::vector<int> &
 		}
 	}
 	else
-		tmp.push_back(toDiv[0]);
-	arr.push_back(tmp);
+	{
+		struggle = toDiv[0];
+		this->isStruggle = true;
+	}
+	if (tmp.size())
+		arr.push_back(tmp);
 	for(unsigned int i = 0; i < 2; i++)
 	{
 		if (!toDiv.empty())
 			toDiv.erase(toDiv.begin());
 	}
 	if (!toDiv.empty())
-		divVector(arr, toDiv);
+		divVector(arr, toDiv, struggle);
+	
+	for(unsigned int i = 0; i < arr.size(); i++)
+	{
+		if (arr[i].size() > 1 && arr[i][1] && arr[i][0] && arr[i][0] < arr[i][1])
+			std::swap(arr[i][0], arr[i][1]);
+	}
 }
 
-void PmergeMe::sortOddVector(std::vector<std::vector<int> > &arr, std::vector<int> &main, std::vector<int> &pend)
+void PmergeMe::sortOddVector(std::vector<std::vector<int> > &arr)
 {
+	for (unsigned int i = 0; i < arr.size() - 1; i++)
+	{
+		if((arr[i + 1].size() > 1) && arr[i][0] > arr[i + 1][0])
+			std::swap(arr[i], arr[i + 1]);
+	}
+	for (unsigned int i = 0; i < arr.size() - 1; i++)
+	{
+		if((arr[i + 1].size() > 1) && arr[i][0] > arr[i + 1][0])
+			sortOddVector(arr);
+	}
+}
+
+void PmergeMe::makePendMainVector(std::vector<std::vector<int> > &arr, std::vector<int> &main, std::vector<int> &pend)
+{
+
 	for (unsigned int i = 0; i < arr.size(); i++)
 	{
 		if(arr[i][0] > arr[i][1])
@@ -175,66 +193,8 @@ void PmergeMe::sortOddVector(std::vector<std::vector<int> > &arr, std::vector<in
 			main.push_back(arr[i][1]);			
 		}
 	}
-}
-
-void PmergeMe::recursDivVector(std::vector<std::vector<int> > &arr, std::vector<int> toDiv, int &index)
-{
-	std::vector<int> firstPart;
-	std::vector<int> secondPart;
-
-	if(toDiv.size() > 2)
-	{
-		for(unsigned int i = 0; i < toDiv.size() / 2; i++)
-			firstPart.push_back(toDiv[i]);
-		for(unsigned int i = toDiv.size() / 2; i < toDiv.size(); i++)
-		{
-			if (!toDiv[i])
-				break;
-			secondPart.push_back(toDiv[i]);
-		}
-		recursDivVector(arr, firstPart, index);
-		recursDivVector(arr, secondPart, index);
-	}
-	else 
-	{
-		arr.push_back(toDiv);
-		index++;
-	}
-}
-
-std::vector<int> PmergeMe::mergeSortedVector(std::vector<std::vector<int> > &arr)
-{
-	std::vector<int> res;
-
-	for(unsigned int i = 0; i < arr.size(); i++)
-	{
-		//res = recursSortVector(res, arr[i]);
-		
-	}
-
-	return res;
-}
-
-std::vector<int> PmergeMe::recursSortVector(std::vector<int> v1, std::vector<int> v2)
-{
-	std::vector<int> res;
-
-	unsigned int i = 0;
-	unsigned int j = 0;
-
-	while(i < v1.size() && j < v2.size())
-	{
-		if(v1[i] < v2[j])
-			res.push_back(v1[i++]);
-		else
-			res.push_back(v2[j++]);
-	}
-	while(i < v1.size())
-		res.push_back(v1[i++]);
-	while(j < v2.size())
-		res.push_back(v2[j++]);
-
-	return res;
+	if(pend[0] < main[0])
+		main.insert(main.begin(), pend[0]);
 }
 
 /********************************************************/

@@ -6,7 +6,7 @@
 /*   By: cmichez <cmichez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 21:47:01 by cmichez           #+#    #+#             */
-/*   Updated: 2024/09/03 18:42:16 by cmichez          ###   ########.fr       */
+/*   Updated: 2024/09/04 18:25:54 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ class PmergeMe
 private:
 	std::vector<int> stack;
 	std::deque<int> myDeque;
+	bool isStruggle;
 public:
 	PmergeMe();
 	PmergeMe(const PmergeMe &copy);
@@ -40,9 +41,11 @@ public:
 	std::vector<int> generateVectorJacob(int n);
 	std::vector<int> recursSortVector(std::vector<int> v1, std::vector<int> v2);
 	std::vector<int> mergeSortedVector(std::vector<std::vector<int> > &arr);
-	void divVector(std::vector<std::vector<int> > &arr, std::vector<int> &toDiv);
-	void sortOddVector(std::vector<std::vector<int> > &arr, std::vector<int> &main, std::vector<int> &pend);
+	void divVector(std::vector<std::vector<int> > &arr, std::vector<int> &toDiv, int &struggle);
+	void makePendMainVector(std::vector<std::vector<int> > &arr, std::vector<int> &main, std::vector<int> &pend);
 	void mergeVector(std::vector<int> &main, std::vector<int> &pend);
+	void sortOddVector(std::vector<std::vector<int> > &arr);
+	void sortBinarySearchVector(std::vector<int> &main, std::vector<int> &pend, std::vector<int> &jacob, int &struggle);
 
 	//Partie Deque
 	int fillDeque(char **av);
