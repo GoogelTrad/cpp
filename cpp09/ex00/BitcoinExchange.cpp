@@ -80,8 +80,9 @@ void BitcoinExchange::finalPrinting(const char* file)
 	}
 	while (std::getline(fd, ligne))
 	{
+		if (!isDateOkay(date))
+			continue;
 		date = ligne.substr(0, ligne.find(" "));
-
 		if (this->isDate(date))
 		{
 			taux = this->chooseDate(date);
@@ -150,4 +151,19 @@ double BitcoinExchange::chooseDate(std::string date)
 
 	it--;
 	return it->second;
+}
+
+
+bool BitcoinExchange::isDateOkay(std::string date)
+{
+	for(int i = 0; i < 10; i++)
+	{
+		if ((i == 5 || i ==8) && date[i] != '-')
+			return false;
+		else if (!std::isdigit(date[i]))
+			return false;
+	}
+
+	return true;
+
 }

@@ -34,6 +34,7 @@ class BitcoinExchange
 		bool isDate(std::string date);
 		void finalPrinting(const char* file);
 		double chooseDate(std::string date);
+		bool isDateOkay(std::string date);
 		~BitcoinExchange();
 
 };
