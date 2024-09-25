@@ -156,13 +156,16 @@ double BitcoinExchange::chooseDate(std::string date)
 
 bool BitcoinExchange::isDateOkay(std::string date)
 {
-	for(int i = 0; i < 10; i++)
-	{
-		if ((i == 5 || i ==8) && date[i] != '-')
-			return false;
-		else if (!std::isdigit(date[i]))
-			return false;
-	}
+	if (date.size() != 10)
+		return false;
+	if (date[4] != '-' && date[7] != '-')
+		return false;
+	
+	std::string year = date.substr(0, 4);
+	std::string month = date.substr(5, 2);
+	std::string day = date.substr(8, 2);
+
+		
 
 	return true;
 
